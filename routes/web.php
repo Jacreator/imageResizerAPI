@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', "HomeController@index");
+Route::get('/register', "HomeController@register");
+
+Route::post('/save', "AuthController@register_user");
+
+Route::get('/token_show', "AuthController@token_show");
+
