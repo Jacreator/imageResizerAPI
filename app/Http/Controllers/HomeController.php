@@ -14,5 +14,13 @@ class HomeController extends Controller
     	return view("pages.register");
     }
 
+    //returns documentation as JSON
+    public function documentation(){
+    	return "Documentation returned as JSON";
+    }
 
+    //allows configuration of files through JSON
+    public function configure(){
+    	return "Allows configurations through JSON";
+    }
 }

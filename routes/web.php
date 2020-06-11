@@ -23,6 +23,13 @@ Route::get('/token_show', "AuthController@token_show");
 
 
 Route::group(['middleware' => ['auth:api']], function(){
-	Route::post('/', 'ResizerController@processImage');
+	//post request to api to resize image
+	Route::post('/v1/resizeImage', 'ResizerController@processImage');
+
+	//get request to get documentation in JSON format
+	Route::get('/v1/documentation' 'HomeController@documentation')
+
+	//post request to configure API setting in JSON format
+	Route::post('/v1/configure' 'HomeController@configure')
 });
 
