@@ -14,14 +14,5 @@ class HomeController extends Controller
     	return view("pages.register");
     }
 
-    public function register_user(Request $request){
 
-
-
-    }
-
-
-    public function token_show(){
-    	return view("pages.token_show");
-    }
 }
