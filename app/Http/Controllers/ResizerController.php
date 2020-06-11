@@ -8,7 +8,7 @@ class ResizerController extends Controller
 {
     public function processImage(Request $request){
     	//get image url and dimension given
-    	$url = $request->input('url');
+    	$url = $request->input('image');
     	$width = $request->input('width');
 
         //check dimensions given by user to confirm if they satisfy limit

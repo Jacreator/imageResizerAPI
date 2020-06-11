@@ -20,3 +20,9 @@ Route::post('/save', "AuthController@register_user");
 
 Route::get('/token_show', "AuthController@token_show");
 
+
+
+Route::group(['middleware' => ['auth:api']], function(){
+	Route::post('/', 'ResizerController@processImage');
+});
+
