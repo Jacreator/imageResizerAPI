@@ -21,6 +21,6 @@ class HomeController extends Controller
 
     //allows configuration of files through JSON
     public function configure(){
-    	return "Allows configurations through JSON";
+    	return "Allows configurations of API through JSON";
     }
 }
