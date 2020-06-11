@@ -49,8 +49,4 @@ class AuthController extends Controller
 
     }
 
-
-    public function token_show(){
-    	return view("pages.token_show");
-    }
 }
