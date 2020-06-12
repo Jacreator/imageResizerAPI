@@ -22,6 +22,7 @@
         <input type="password" name="password_confirmation" class="form-control">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
+      <p><small id="emailHelp" class="form-text text-muted">Already have an account? <a href="/login">Login</a></small></p>
     </form>
   </div>
 </div>

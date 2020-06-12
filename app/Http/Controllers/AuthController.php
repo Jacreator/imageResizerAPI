@@ -84,7 +84,7 @@ class AuthController extends Controller
         if($validator->passes()){
             //authenticate user
             if (!auth()->attempt($data)) {
-                return response(['message'=>'Invalid credentials']);
+                return view('pages.login')->with(['message'=>'Invalid credentials']);
             }
             return view("pages.token_show")->with("accessToken", auth()->user()->accessToken);
         	
@@ -92,7 +92,7 @@ class AuthController extends Controller
 
         }
         else{
-        	redirect('/login');
+            return view('pages.login')->with($validator->errors()->all());
         }
        
 

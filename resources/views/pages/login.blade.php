@@ -13,6 +13,7 @@
       <input type="password" name="password" class="form-control">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+    <p><small id="emailHelp" class="form-text text-muted">Don't have an account? <a href="/register">Register</a></small></p>
   </form>
   </div>
 </div>
