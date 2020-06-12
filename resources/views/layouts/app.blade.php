@@ -11,7 +11,11 @@
     <title>Image Resizer</title>
   </head>
   <body>
-    @yield('content')
+    <div class="container">
+      <div class="row justify-content-md-center">
+        @yield('content')
+      </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

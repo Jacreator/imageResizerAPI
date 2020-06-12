@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', "HomeController@index");
 Route::get('/register', "HomeController@register");
+Route::get('/login', "HomeController@login");
+
 
 Route::post('/save', "AuthController@register_user");
-Route::get('/view_token', "AuthController@view_token");
+Route::post('/authenticate', "AuthController@authenticate");
 Route::get('/token_show', "AuthController@token_show");
 
 

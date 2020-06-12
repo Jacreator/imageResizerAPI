@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 use Validator;
 use App\User;
@@ -40,6 +41,10 @@ class AuthController extends Controller
             //generate access token for client
             $accessToken = $user->createToken('authToken')->accessToken;
 
+            //save token to users table
+            $user->accessToken = $accessToken;
+            $user->save();
+
             //create default configuration for user 
             $configuration = new Configuration();
 
@@ -58,16 +63,17 @@ class AuthController extends Controller
 
     }
 
-    public function view_token(Request $request){
+
+    public function authenticate(Request $request){
     			//rules for validation of fields
 	    $rules = [
-	        'name' => 'required',  
+	        'email' => 'required|email',  
 	        'password' => 'required'
 	    ];
 
 	    	    //convert object to array
 	    $data = array(
-	    	"name" => $request->name,
+	    	"email" => $request->email,
 	    	"password" => $request->password,
 	    );
 
@@ -76,11 +82,19 @@ class AuthController extends Controller
 
 
         if($validator->passes()){
+            //authenticate user
+            if (!auth()->attempt($data)) {
+                return response(['message'=>'Invalid credentials']);
+            }
+            return view("pages.token_show")->with("accessToken", auth()->user()->accessToken);
         	
+
+
         }
         else{
-            return $validator->errors()->all();
+        	redirect('/login');
         }
+       
 
     }
 }
