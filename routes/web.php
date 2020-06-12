@@ -17,7 +17,7 @@ Route::get('/', "HomeController@index");
 Route::get('/register', "HomeController@register");
 
 Route::post('/save', "AuthController@register_user");
-
+Route::get('/view_token', "AuthController@view_token");
 Route::get('/token_show', "AuthController@token_show");
 
 
