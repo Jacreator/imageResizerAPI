@@ -11,7 +11,20 @@
     <title>Image Resizer</title>
   </head>
   <body>
-    @yield('content')
+    <div class="container">
+      <div class="row justify-content-md-center">
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+        @yield('content')
+      </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

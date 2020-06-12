@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 use Validator;
 use App\User;
+use App\Configuration;
 
 class AuthController extends Controller
 {
@@ -39,6 +41,18 @@ class AuthController extends Controller
             //generate access token for client
             $accessToken = $user->createToken('authToken')->accessToken;
 
+            //save token to users table
+            $user->accessToken = $accessToken;
+            $user->save();
+
+            //create default configuration for user 
+            $configuration = new Configuration();
+
+	        $configuration->receipt_format = "JSON";
+	        $configuration->user_id = $user->id;
+
+	        $configuration->save();
+
             return view("pages.token_show")->with("accessToken", $accessToken);
          }
         else{
@@ -49,4 +63,38 @@ class AuthController extends Controller
 
     }
 
+
+    public function authenticate(Request $request){
+    			//rules for validation of fields
+	    $rules = [
+	        'email' => 'required|email',  
+	        'password' => 'required'
+	    ];
+
+	    	    //convert object to array
+	    $data = array(
+	    	"email" => $request->email,
+	    	"password" => $request->password,
+	    );
+
+	   	//run the validator
+	    $validator = Validator::make($data, $rules);
+
+
+        if($validator->passes()){
+            //authenticate user
+            if (!auth()->attempt($data)) {
+                return view('pages.login')->with(['message'=>'Invalid credentials']);
+            }
+            return view("pages.token_show")->with("accessToken", auth()->user()->accessToken);
+        	
+
+
+        }
+        else{
+            return view('pages.login')->with($validator->errors()->all());
+        }
+       
+
+    }
 }

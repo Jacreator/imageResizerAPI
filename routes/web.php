@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', "HomeController@index");
 Route::get('/register', "HomeController@register");
+Route::get('/login', "HomeController@login");
+
 
 Route::post('/save', "AuthController@register_user");
-
+Route::post('/authenticate', "AuthController@authenticate");
 Route::get('/token_show', "AuthController@token_show");
 
 
@@ -27,9 +29,9 @@ Route::group(['middleware' => ['auth:api']], function(){
 	Route::post('/v1/resizeImage', 'ResizerController@processImage');
 
 	//get request to get documentation in JSON format
-	Route::get('/v1/documentation' 'HomeController@documentation')
+	Route::get('/v1/documentation', 'HomeController@documentation');
 
 	//post request to configure API setting in JSON format
-	Route::post('/v1/configure' 'HomeController@configure')
+	Route::post('/v1/configure', 'HomeController@configure');
 });
 
